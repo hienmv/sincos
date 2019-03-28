@@ -8,3 +8,6 @@ B. Execute the following command to run the program.
 
 ** The libraries (*.so) and executable file (myapp) are stored in bin folder.
 
+** Sin, Cos with Taylor series
+
+![alt text](https://i.stack.imgur.com/sG2mY.png)

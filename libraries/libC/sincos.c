@@ -35,8 +35,7 @@ double calSin(double x) {
 	double fract = x;
 	int sign = -1;
 
-	double result = doCalculate(x, sinVal, curVal, fract, sign);
-	return result;
+	return doCalculate(x, sinVal, curVal, fract, sign);
 }
 
 double calCos(double x) {
@@ -50,6 +49,5 @@ double calCos(double x) {
 	double fract = 1.0;
 	int sign = -1;
 	
-	double result = doCalculate(x, cosVal, curVal, fract, sign);
-	return result;
+	return doCalculate(x, cosVal, curVal, fract, sign);
 }
