@@ -8,6 +8,22 @@
 const double EPOS = 3E-12;
 const double MIN_VAL = 3E-14;
 
+double doCalculate(double x, double val, int curVal, double fract, int sign) {
+	while (1) 
+	{
+		fract *= (double)x*x / ((curVal + 1) * (curVal + 2));
+		double newVal = val + sign * fract;
+		if (fabs(newVal - val) <= EPOS) 
+		{
+			return (fabs(newVal) < MIN_VAL) ? 0.0 : newVal;
+		}
+		// update current value
+		val = newVal;
+		sign *= -1;
+		curVal += 2;
+	}
+}
+
 double calSin(double x) {
 
 	int div = round(x) / 360;
@@ -19,20 +35,8 @@ double calSin(double x) {
 	double fract = x;
 	int sign = -1;
 
-	while (1) 
-	{
-		fract *= (double)x*x / ((curVal + 1) * (curVal + 2));
-		double newSinVal = sinVal + sign * fract;
-		if (fabs(newSinVal - sinVal) <= EPOS) 
-		{
-			return (fabs(newSinVal) < MIN_VAL) ? 0.0 : newSinVal;
-		}
-		// update current value
-		sinVal = newSinVal;
-		sign *= -1;
-		curVal += 2;
-	}
-	return 0.0;
+	double result = doCalculate(x, sinVal, curVal, fract, sign);
+	return result;
 }
 
 double calCos(double x) {
@@ -46,19 +50,6 @@ double calCos(double x) {
 	double fract = 1.0;
 	int sign = -1;
 	
-	while (1) 
-	{
-		fract *= (double)x*x / ((curVal+1) * (curVal+2));
-		double newCosVal = cosVal + sign * fract;
-		if (fabs(newCosVal - cosVal) <= EPOS) 
-		{
-			return (fabs(newCosVal) < MIN_VAL) ? 0.0 : newCosVal;
-		}
-		// update current value;
-		cosVal = newCosVal;
-		sign *= -1;
-		curVal += 2;
-	}
-
-	return 0.0;
+	double result = doCalculate(x, cosVal, curVal, fract, sign);
+	return result;
 }
